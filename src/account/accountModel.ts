@@ -10,7 +10,7 @@ export interface Account {
 }
 
 export interface AccountBalance {
-    balance: number; // Integer
+    balance: number; // Integer, in the smallest unit of the currency (e.g. cents)
     currencyCode: string;
 }
 
