@@ -23,3 +23,7 @@ To run the tests, use the following command once the project is running.
 npm test
 ```
 
+### Using the API
+
+Example URLs and request bodies can be found in the `curl.http` file, compatible with the REST Client extension for 
+Visual Studio Code or IntelliJ IDEA.

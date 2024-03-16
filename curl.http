@@ -1,0 +1,78 @@
+### Get account by IBAN
+GET http://localhost:8080/accounts/DE60436764116271065317
+
+### Get account by invalid IBAN
+GET http://localhost:8080/accounts/DE60436764116271065317AAANBSADFAJK
+
+### List Accounts
+GET http://localhost:8080/accounts?page=1&pageSize=10&currencyCode=EUR
+
+### List Accounts filtered by balance
+GET http://localhost:8080/accounts?page=1&pageSize=10&currencyCode=EUR&minBalance=8000000&maxBalance=9000000
+
+### List Accounts with invalid page
+GET http://localhost:8080/accounts?page=0&pageSize=10&currencyCode=EUR
+
+### List Accounts with invalid page size
+GET http://localhost:8080/accounts?page=1&pageSize=0&currencyCode=EUR
+
+### List Accounts with invalid currency code
+GET http://localhost:8080/accounts?page=1&pageSize=10&currencyCode=EURR
+
+### List Accounts with invalid min balance
+GET http://localhost:8080/accounts?page=1&pageSize=10&currencyCode=EUR&minBalance=8000000A
+
+### List Accounts with invalid max balance
+GET http://localhost:8080/accounts?page=1&pageSize=10&currencyCode=EUR&maxBalance=9000000A
+
+### Transfer funds to a non-existing account
+POST http://localhost:8080/accounts/transfer
+Content-Type: application/json
+
+{
+    "fromIBAN": "DE60436764116271065317",
+    "toIBAN": "DE60436764116271065318",
+    "amount": 1000,
+    "currencyCode": "EUR",
+    "reference": "Test Transfer",
+    "toBIC": "GENODEM1GLS"
+}
+
+### Transfer funds from a non-existing account
+POST http://localhost:8080/accounts/transfer
+Content-Type: application/json
+
+{
+  "fromIBAN": "DE60436764116271065318",
+  "toIBAN": "DE60436764116271065317",
+  "amount": 1000,
+  "currencyCode": "EUR",
+  "reference": "Test Transfer",
+  "toBIC": "GENODEM1GLS"
+}
+
+### Transfer more funds than available
+POST http://localhost:8080/accounts/transfer
+Content-Type: application/json
+
+{
+  "fromIBAN": "DE60436764116271065317",
+  "toIBAN": "DE79094357277765178418",
+  "amount": 1000000000000,
+  "currencyCode": "EUR",
+  "reference": "Test Transfer",
+  "toBIC": "GENODEM1GLS"
+}
+
+### Transfer funds
+POST http://localhost:8080/accounts/transfer
+Content-Type: application/json
+
+{
+  "fromIBAN": "DE60436764116271065317",
+  "toIBAN": "DE79094357277765178418",
+  "amount": 100,
+  "currencyCode": "EUR",
+  "reference": "Test Transfer",
+  "toBIC": "GENODEM1GLS"
+}
